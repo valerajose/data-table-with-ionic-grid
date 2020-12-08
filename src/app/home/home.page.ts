@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Console } from 'console';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
