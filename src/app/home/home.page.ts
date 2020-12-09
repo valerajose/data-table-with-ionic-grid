@@ -14,6 +14,7 @@ export class HomePage {
 
   data = [];
   bulkEdit = false;
+  edit = {};
   sortDirection = 0;
   sorKey = null;
 
@@ -54,15 +55,43 @@ export class HomePage {
   }
 
   toggleBulkEdit(){
-
+    this.bulkEdit = !this.bulkEdit;
+    this.edit = {};
   }
 
   bulkDelete(){
-
+    console.log('this.edit', this.edit);
+    const toDelete = Object.keys(this.edit);
+    console.log(toDelete);
+    const reallyDelete = toDelete.filter(index => this.edit[index]).map(key => +key);
+    while(reallyDelete.length){
+      this.data.splice(reallyDelete.pop(), 1);
+    }
+    this.toggleBulkEdit();
   }
 
   removeRow(index){
     this.data.splice(index, 1);
+  }
+
+  nextPage(){
+    this.page++;
+    this.loadData();
+  }
+
+  prevPage(){
+    this.page--;
+    this.loadData();
+  }
+
+  gorFirt(){
+    this.page = 0;
+    this.loadData();
+  }
+
+  goLast(){
+    this.page = this.totalPages -1 ;
+    this.loadData();
   }
 
 }
